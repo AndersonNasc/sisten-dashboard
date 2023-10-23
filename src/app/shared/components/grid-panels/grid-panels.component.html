@@ -1,0 +1,167 @@
+<!-- <img src="../../../../assets/images/logos/painel.svg" /> -->
+
+<div class="col-lg-8">
+  <mat-card class="cardWithShadow">
+    <mat-card-content class="p-24">
+      <div class="d-flex justify-content-between">
+        <mat-card-title class="title">Paineis</mat-card-title>
+        <mat-icon
+          title="Novo Painel"
+          class="style-icon add"
+          (click)="newDashboard()"
+          >add</mat-icon
+        >
+      </div>
+
+      <div class="table-responsive m-t-16">
+        <table mat-table [dataSource]="dataSource" class="w-100">
+          <!-- Image Column -->
+          <ng-container matColumnDef="image">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Imagem
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="d-flex align-items-center">
+                <img
+                  [src]="element.imagePath"
+                  alt="users"
+                  width="40"
+                  class="rounded-circle"
+                />
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Dashboard Column -->
+          <ng-container matColumnDef="dashboard">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Painel
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.name }}
+            </td>
+          </ng-container>
+
+          <!-- IP Column -->
+          <ng-container matColumnDef="ip">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              IP
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.ip }}
+            </td>
+          </ng-container>
+
+          <!-- Id Point Column -->
+          <ng-container matColumnDef="idPoint">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              ID Ponto
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.idPoint }}
+            </td>
+          </ng-container>
+
+          <!-- Model Column -->
+          <ng-container matColumnDef="model">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Modelo
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.model }}
+            </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Status
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-template [ngIf]="element.status == 'Ativo'">
+                <span
+                  class="bg-light-primary text-primary bg-info p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
+                >
+                  {{ element.status | titlecase }}
+                </span>
+              </ng-template>
+              <ng-template [ngIf]="element.status == 'Alerta'">
+                <span
+                  class="bg-light-warning text-warning-emphasis bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
+                >
+                  {{ element.status | titlecase }}
+                </span>
+              </ng-template>
+              <ng-template [ngIf]="element.status == 'Inativo'">
+                <span
+                  class="bg-light-error text-danger-emphasis bg-danger rounded p-1 f-w-600 p-6 p-y-4 f-s-12"
+                >
+                  {{ element.status | titlecase }}
+                </span>
+              </ng-template>
+            </td>
+          </ng-container>
+
+          <!-- Update Column -->
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon
+                (click)="updateDashboard(element)"
+                title="Editar"
+                class="style-icon update"
+                >edit</mat-icon
+              >
+            </td>
+          </ng-container>
+
+          <!-- Delete Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon
+                title="Apagar"
+                class="style-icon delete"
+                (click)="delete(element.id)"
+                >delete</mat-icon
+              >
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,22 @@
+<div class="col-lg-6">
+    <!-- --------------------------------------------------- -->
+    <!-- List with Selection -->
+    <!-- --------------------------------------------------- -->
+    <mat-card class="b-1 shadow-none">
+      <mat-card-header>
+        <mat-card-title class="title">Parametrização de Paineis</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="b-t-1">
+        <mat-selection-list #shoes>
+          <mat-list-option *ngFor="let shoe of typesOfShoes">
+            {{ shoe }}
+          </mat-list-option>
+        </mat-selection-list>
+
+        <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded title">
+          Paineis Selecionados: {{ shoes.selectedOptions.selected.length }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+

@@ -1,0 +1,16 @@
+<!-- Sidenav -->
+    <mat-drawer-container class="example-container" autosize>
+      <h3>Menu</h3>
+      <div class="example-sidenav-content btn-active"  *ngFor="let item of menu">
+        <button 
+          type="button "
+          mat-button 
+          [routerLink]="[item.route]" 
+        >
+        {{ item.description}}
+      </button>
+      </div>
+    </mat-drawer-container>
+
+    
+

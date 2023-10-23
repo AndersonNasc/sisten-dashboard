@@ -1,0 +1,220 @@
+{
+  "uuid": "8e7d035b-b161-4f9b-9a21-2c16441f2e23",
+  "lastMigration": 28,
+  "name": "Db",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "abdc1062-0485-453c-a673-f23f8bdd3b86",
+      "type": "http",
+      "documentation": "Use multiple responses with rules",
+      "method": "post",
+      "endpoint": "authentication",
+      "responses": [
+        {
+          "uuid": "3c6f94e4-9731-4d06-969b-86590a8b0e26",
+          "body": "{\n  \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\",\n  \"user\": {\n    \"nome\": \"Admin\",\n    \"email\": \"admin@admin.com\",\n    \"id\": 1,\n    \"role\": \"USER\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Default response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "admin@admin.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "123456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "39ba76a8-e12d-4cf7-af65-56a06030e771",
+          "body": "{\n  \"message\": \"Email ou senha incorreto\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "admin@admin.com",
+              "invert": true,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "123456",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c3715ffe-dbb9-4abc-9429-26aac980e5cb",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "menu",
+      "responses": [
+        {
+          "uuid": "d4a91a68-d07a-4557-9549-10ab15ea10de",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "akt0",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "c3610124-6bdb-4756-aaf0-55aafeeccfc1",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "dashboard",
+      "responses": [
+        {
+          "uuid": "4d5e9cca-9f35-441f-b13d-4b226405a4aa",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "z79t",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "abdc1062-0485-453c-a673-f23f8bdd3b86"
+    },
+    {
+      "type": "route",
+      "uuid": "c3715ffe-dbb9-4abc-9429-26aac980e5cb"
+    },
+    {
+      "type": "route",
+      "uuid": "c3610124-6bdb-4756-aaf0-55aafeeccfc1"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "37159e39-bb21-4772-bd5e-2463cad98176",
+      "id": "akt0",
+      "name": "menu",
+      "documentation": "",
+      "value": " [\r\n    {\r\n      \"description\": \"Home\",\r\n      \"route\": \"/home\"\r\n    },\r\n    {\r\n      \"description\": \"Tela de Paineis\",\r\n      \"route\": \"/screen-panels\"\r\n    },\r\n    {\r\n      \"description\": \"Parametrização\",\r\n      \"route\": \"/parametrization\"\r\n    }\r\n  ]"
+    },
+    {
+      "uuid": "9b0040a2-a379-45c6-b7a2-039908164322",
+      "id": "z79t",
+      "name": "dashboard",
+      "documentation": "",
+      "value": "[\r\n    {\r\n      \"id\": 1,\r\n      \"imagePath\": \"../../../../assets/images/logos/painel.svg\",\r\n      \"name\": \"Painel Liberdade\",\r\n      \"ip\": \"001\",\r\n      \"idPoint\": \"1234\",\r\n      \"model\": \"PXYZ\",\r\n      \"status\": \"Ativo\"\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"imagePath\": \"../../../../assets/images/logos/painel.svg\",\r\n      \"name\": \"Painel Consolação\",\r\n      \"ip\": \"002\",\r\n      \"idPoint\": \"1345\",\r\n      \"model\": \" KJLS\",\r\n      \"status\": \"Alerta\"\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"imagePath\": \"../../../../assets/images/logos/painel.svg\",\r\n      \"name\": \"Painel Consolação\",\r\n      \"ip\": \"002\",\r\n      \"idPoint\": \"1345\",\r\n      \"model\": \" KJLS\",\r\n      \"status\": \"Alerta\"\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"imagePath\": \"../../../../assets/images/logos/painel.svg\",\r\n      \"name\": \"Painel Consolação\",\r\n      \"ip\": \"002\",\r\n      \"idPoint\": \"1345\",\r\n      \"model\": \" KJLS\",\r\n      \"status\": \"Alerta\"\r\n    },\r\n    {\r\n      \"id\": 3,\r\n      \"imagePath\": \"../../../../assets/images/logos/painel.svg\",\r\n      \"name\": \"Painel Tatuapé\",\r\n      \"ip\": \"003\",\r\n      \"idPoint\": \"1158\",\r\n      \"model\": \"OLKJ\",\r\n      \"status\": \"Inativo\"\r\n    }\r\n  ]"
+    }
+  ]
+}

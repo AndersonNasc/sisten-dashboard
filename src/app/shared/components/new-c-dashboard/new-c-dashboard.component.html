@@ -1,0 +1,90 @@
+<div
+  class="blank-layout-container d-flex justify-content-center align-items-center bg-light-primary mt-5 "
+>
+  <div
+    class="position-relative row w-100 h-100 bg-gredient justify-content-center"
+  >
+    <div class="col-12 d-flex align-items-center justify-content-center">
+      <mat-card class="cardWithShadow boxed-auth">
+        <mat-card-content class="p-32">
+            <h1 class="title">Painel</h1>
+          <form class="m-t-30"  [formGroup]="formDashboard">
+            <div class="col-12 row">
+              <div class="col-6">
+                <!-- name dashboard -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >Nome do Painel</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput  formControlName="name"/>
+                </mat-form-field>
+
+                <!-- ip -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >IP</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput formControlName="ip"/>
+                </mat-form-field>
+
+                <!-- id ponto -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >ID Ponto</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput formControlName="idPoint"/>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <!-- model -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >Modelo</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput formControlName="model"/>
+                </mat-form-field>
+
+                <!-- status -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >Status</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput formControlName="status"/>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- register -->
+            <a
+              [routerLink]="['/']"
+              mat-flat-button
+              class="w-100 btn-register"
+              (click)="save()"
+            >
+              Salvar
+            </a>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
