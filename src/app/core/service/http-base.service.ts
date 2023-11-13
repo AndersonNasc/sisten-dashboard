@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class HttpBaseService {
   
   private readonly httpClient!: HttpClient;
-  private apiBase = 'http://localhost:3000/';
+  // private apiBase = 'http://localhost:3000/';
+   private apiBase = 'http://184.72.118.104:8000/';
 
   constructor(protected readonly injector: Injector) {
     if (injector == null || injector == undefined) {

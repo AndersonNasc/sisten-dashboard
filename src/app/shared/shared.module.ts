@@ -14,6 +14,7 @@ import { GridPanelsComponent } from './components/grid-panels/grid-panels.compon
 import { MenuComponent } from './components/menu/menu.component';
 import { NewCDashboardComponent } from './components/new-c-dashboard/new-c-dashboard.component';
 import { NewCParameterizationComponent } from './components/new-c-parameterization/new-c-parameterization.component';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NewCParameterizationComponent } from './components/new-c-parameterizati
     MenuComponent,
     NewCDashboardComponent,
     NewCParameterizationComponent,
+    MessageComponent,
   ],
   imports: [
     CommonModule,

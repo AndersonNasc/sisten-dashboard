@@ -7,7 +7,11 @@ import { Dashboard } from '../../models/dashboard';
 //Material
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+//Components
+import { MessageComponent }from 'src/app/shared/components/message/message.component'
 @Component({
   selector: 'app-grid-panels',
   templateUrl: './grid-panels.component.html',
@@ -20,7 +24,10 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
     'ip',
     'idPoint',
     'model',
+    'door',
     'status',
+    'last_status',
+    'message',
     'update',
     'delete'
   ];
@@ -31,7 +38,8 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private dasboardService: DasboardService
+    private dasboardService: DasboardService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -51,19 +59,35 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   }
 
   updateDashboard(user: Dashboard) {
-    this.router.navigate(['edit-dashboard', user.id]);
+    // this.router.navigate(['edit-dashboard', user.id]);
   }
 
   delete(id: number) {
-    this.dasboardService.deleteListId(id).subscribe((res) => {
-      this.router.navigate(['screen-panels']);
-      this.getListUsers();
-    });
+    // this.dasboardService.deleteListId(id).subscribe((res) => {
+    //   this.router.navigate(['screen-panels']);
+    //   this.getListUsers();
+    // });
   }
 
   newDashboard() {
-    this.router.navigate(['new-dashboard']);
+    // this.router.navigate(['new-dashboard']);
   }
 
-  
+
+
+  animal!: string;
+  name!: string;
+
+  openDialog(id:string): void {
+    const dialogRef = this.dialog.open(MessageComponent, {
+      width: '250px',
+      data: {id: id, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe((result: string) => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
 }

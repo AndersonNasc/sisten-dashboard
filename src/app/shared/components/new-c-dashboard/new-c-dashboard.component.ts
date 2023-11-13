@@ -30,15 +30,15 @@ export class NewCDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route = this.activatedRoute.snapshot.url[0].path;
-    this.createForm();
+    // this.route = this.activatedRoute.snapshot.url[0].path;
+    // this.createForm();
 
-    if (this.route === 'edit-dashboard') {
-      this.id = this.activatedRoute.snapshot.url[1].path;
-      this.getDashboardId();
-    } else {
-      this.ehNewForm = true;
-    }
+    // if (this.route === 'edit-dashboard') {
+    //   this.id = this.activatedRoute.snapshot.url[1].path;
+    //   this.getDashboardId();
+    // } else {
+    //   this.ehNewForm = true;
+    // }
 
   }
 
@@ -53,50 +53,50 @@ export class NewCDashboardComponent implements OnInit {
     });
   }
 
-  getDashboardId() {
-    this.dasboardService
-      .getListId(parseInt(this.id))
-      .subscribe((dashboard: Dashboard) => {
-        this.dashboard = dashboard;
-        this.formDashboard.controls['name'].setValue(dashboard.name);
-        this.formDashboard.controls['ip'].setValue(dashboard.ip);
-        this.formDashboard.controls['idPoint'].setValue(dashboard.idPoint);
-        this.formDashboard.controls['model'].setValue(dashboard.model);
-        this.formDashboard.controls['status'].setValue(dashboard.status);
-        console.log(this.dashboard);
-      });
-  }
+  // getDashboardId() {
+  //   this.dasboardService
+  //     .getListId(parseInt(this.id))
+  //     .subscribe((dashboard: Dashboard) => {
+  //       this.dashboard = dashboard;
+  //       this.formDashboard.controls['name'].setValue(dashboard.name);
+  //       this.formDashboard.controls['ip'].setValue(dashboard.ip);
+  //       this.formDashboard.controls['idPoint'].setValue(dashboard.idPoint);
+  //       this.formDashboard.controls['model'].setValue(dashboard.model);
+  //       this.formDashboard.controls['status'].setValue(dashboard.status);
+  //       console.log(this.dashboard);
+  //     });
+  // }
 
-  save() {
-    //verifica se foi alterado para salvar
-    if (this.formDashboard.touched && this.formDashboard.dirty) {
+  // save() {
+  //   //verifica se foi alterado para salvar
+  //   if (this.formDashboard.touched && this.formDashboard.dirty) {
       
-      const payload: Dashboard = {
-        name: this.formDashboard.controls['name'].value,
-        ip: this.formDashboard.controls['ip'].value,
-        idPoint: this.formDashboard.controls['idPoint'].value,
-        model: this.formDashboard.controls['model'].value,
-        status: this.formDashboard.controls['status'].value,
-      };
+  //     const payload: Dashboard = {
+  //       name: this.formDashboard.controls['name'].value,
+  //       ip: this.formDashboard.controls['ip'].value,
+  //       idPoint: this.formDashboard.controls['idPoint'].value,
+  //       model: this.formDashboard.controls['model'].value,
+  //       status: this.formDashboard.controls['status'].value,
+  //     };
 
-      if (this.ehNewForm) {
-        this.createUser(payload);
-      } else {
-        payload.id = this.dashboard.id;
-        this.editUser(payload);
-      }
-    }
-  }
+  //     if (this.ehNewForm) {
+  //       this.createUser(payload);
+  //     } else {
+  //       payload.id = this.dashboard.id;
+  //       this.editUser(payload);
+  //     }
+  //   }
+  // }
 
-  createUser(payload: Dashboard) {
-    this.dasboardService.create(payload).subscribe((res) => {
-      this.router.navigate(['screen-panels']);
-    });
-  }
-  editUser(payload: Dashboard) {
-    this.dasboardService.updateListId(payload).subscribe((res) => {
-      this.router.navigate(['screen-panels']);
-    });
-  }
+  // createUser(payload: Dashboard) {
+  //   this.dasboardService.create(payload).subscribe((res) => {
+  //     this.router.navigate(['screen-panels']);
+  //   });
+  // }
+  // editUser(payload: Dashboard) {
+  //   this.dasboardService.updateListId(payload).subscribe((res) => {
+  //     this.router.navigate(['screen-panels']);
+  //   });
+  // }
 
 }

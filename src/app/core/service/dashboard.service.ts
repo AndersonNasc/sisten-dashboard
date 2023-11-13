@@ -7,7 +7,7 @@ import { Dashboard } from 'src/app/shared/models/dashboard';
   providedIn: 'root',
 })
 export class DasboardService extends HttpBaseService {
-  private endpoint = 'dashboard';
+  private endpoint = 'v1/painel';
 
   constructor(protected override readonly injector: Injector) {
     super(injector);
@@ -20,14 +20,22 @@ export class DasboardService extends HttpBaseService {
   getListId(id: number): Observable<any> {
     return this.httpGet(`${this.endpoint}/${id}`);
   }
-
-  updateListId(payload: Dashboard): Observable<any> {
-    return this.httpPut(`${this.endpoint}/${payload.id}`, payload);
+  setMessage(ip: string, mensagem: string, porta: string): Observable<any> {
+    var model = {
+      "id":ip,
+      "porta":porta,
+      "mensagem":mensagem
+      }
+    return this.httpPost(`${this.endpoint}/enviar-mensagem`, model);
   }
 
-  deleteListId(id: number): Observable<any> {
-    return this.httpDelete(`${this.endpoint}/${id}`);
-  }
+  // updateListId(payload: Dashboard): Observable<any> {
+  //   return this.httpPut(`${this.endpoint}/${payload.id}`, payload);
+  // }
+
+  // deleteListId(id: number): Observable<any> {
+  //   return this.httpDelete(`${this.endpoint}/${id}`);
+  // }
 
   create(payload: Dashboard): Observable<any> {
     return this.httpPost(`${this.endpoint}`, payload);

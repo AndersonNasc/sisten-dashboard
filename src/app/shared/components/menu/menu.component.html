@@ -1,13 +1,31 @@
 <!-- Sidenav -->
     <mat-drawer-container class="example-container" autosize>
       <h3>Menu</h3>
-      <div class="example-sidenav-content btn-active"  *ngFor="let item of menu">
+      <div class="example-sidenav-content btn-active"  >
         <button 
           type="button "
           mat-button 
-          [routerLink]="[item.route]" 
+          routerLink="/home" 
         >
-        {{ item.description}}
+       Home
+      </button>
+      </div>
+      <div class="example-sidenav-content btn-active"  >
+        <button 
+          type="button "
+          mat-button 
+          routerLink="/screen-panels" 
+        >
+       Tela de Paineis
+      </button>
+      </div>
+      <div class="example-sidenav-content btn-active"  >
+        <button 
+          type="button "
+          mat-button 
+          routerLink="/parametrization" 
+        >
+       Parametrização
       </button>
       </div>
     </mat-drawer-container>

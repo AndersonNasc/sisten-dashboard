@@ -6,7 +6,7 @@
       <div class="d-flex justify-content-between">
         <mat-card-title class="title">Paineis</mat-card-title>
         <mat-icon
-          title="Novo Painel"
+          title="Adicionar Paineis"
           class="style-icon add"
           (click)="newDashboard()"
           >add</mat-icon
@@ -27,9 +27,9 @@
             <td mat-cell *matCellDef="let element">
               <div class="d-flex align-items-center">
                 <img
-                  [src]="element.imagePath"
+                  src="../../../../assets/images/logos/analogicatec.web7039.uni5_.net-painel-eletronico-de-senha-guiche-5-digitos-painel-eletronico-de-senha-guiche-5-digitos-display3.png"
                   alt="users"
-                  width="40"
+                  width="80"
                   class="rounded-circle"
                 />
               </div>
@@ -46,7 +46,7 @@
               Painel
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              {{ element.name }}
+              {{ element.nome }}
             </td>
           </ng-container>
 
@@ -74,7 +74,7 @@
               ID Ponto
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              {{ element.idPoint }}
+              {{ element.id_ponto }}
             </td>
           </ng-container>
 
@@ -88,7 +88,21 @@
               Modelo
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              {{ element.model }}
+              {{ element.modelo }}
+            </td>
+          </ng-container>
+
+          <!-- Door Column -->
+          <ng-container matColumnDef="door">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Porta
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.porta }}
             </td>
           </ng-container>
 
@@ -99,30 +113,57 @@
               *matHeaderCellDef
               class="f-w-600 mat-subtitle-1 f-s-14"
             >
-              Status
+              Ativo
             </th>
             <td mat-cell *matCellDef="let element">
-              <ng-template [ngIf]="element.status == 'Ativo'">
+              <ng-template [ngIf]="element.flag_ativo == true">
                 <span
                   class="bg-light-primary text-primary bg-info p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
                 >
-                  {{ element.status | titlecase }}
+                   Ativo 
                 </span>
               </ng-template>
-              <ng-template [ngIf]="element.status == 'Alerta'">
+              <!-- <ng-template [ngIf]="element.flag_ativo == 'Alerta'">
                 <span
                   class="bg-light-warning text-warning-emphasis bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
                 >
                   {{ element.status | titlecase }}
                 </span>
-              </ng-template>
-              <ng-template [ngIf]="element.status == 'Inativo'">
+              </ng-template> -->
+              <ng-template [ngIf]="element.flag_ativo == false">
                 <span
                   class="bg-light-error text-danger-emphasis bg-danger rounded p-1 f-w-600 p-6 p-y-4 f-s-12"
                 >
-                  {{ element.status | titlecase }}
+                Inativo
                 </span>
               </ng-template>
+            </td>
+          </ng-container>
+
+          <!-- Last Status -->
+          <ng-container matColumnDef="last_status">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="f-w-600 mat-subtitle-1 f-s-14"
+            >
+              Status
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.ultimo_status }}
+            </td>
+          </ng-container>
+
+          <!-- Update Column -->
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon
+                (click)="openDialog(element._id)"
+                title="Mensagens"
+                class="style-icon update"
+                >edit</mat-icon
+              >
             </td>
           </ng-container>
 
@@ -165,3 +206,7 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+
+
+
