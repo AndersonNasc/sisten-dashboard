@@ -20,7 +20,7 @@
                   class="w-100"
                   color="primary"
                 >
-                  <input matInput  formControlName="name"/>
+                  <input matInput  formControlName="formDashboard.controls.nome"/>
                 </mat-form-field>
 
                 <!-- ip -->
@@ -70,6 +70,9 @@
                   color="primary"
                 >
                   <input matInput formControlName="status"/>
+
+                   <!-- active -->
+                <mat-slide-toggle [checked]="isCheckedSlide" (change)="changeSlide($event)">Ativo</mat-slide-toggle>
                 </mat-form-field>
               </div>
             </div>

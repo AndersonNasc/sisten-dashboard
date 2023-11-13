@@ -8,5 +8,5 @@ export interface Dashboard {
   porta: string;
   modelo: string;
   ultimo_status: string;
-  msg_fixa: string;
+  msg_fixa?: string;
 }

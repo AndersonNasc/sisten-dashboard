@@ -25,7 +25,7 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
     'idPoint',
     'model',
     'door',
-    'status',
+    'active',
     'last_status',
     'message',
     'update',
@@ -70,7 +70,7 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   }
 
   newDashboard() {
-    // this.router.navigate(['new-dashboard']);
+    this.router.navigate(['new-dashboard']);
   }
 
 
@@ -78,10 +78,10 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   animal!: string;
   name!: string;
 
-  openDialog(id:string): void {
+  openDialog(ip:string, porta:string, painel:string): void {
     const dialogRef = this.dialog.open(MessageComponent, {
-      width: '250px',
-      data: {id: id, animal: this.animal}
+      width: '450px',
+      data: {ip: ip, porta: porta, painel:painel}
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {

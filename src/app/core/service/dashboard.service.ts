@@ -22,11 +22,11 @@ export class DasboardService extends HttpBaseService {
   }
   setMessage(ip: string, mensagem: string, porta: string): Observable<any> {
     var model = {
-      "id":ip,
+      "ip":ip,
       "porta":porta,
       "mensagem":mensagem
       }
-    return this.httpPost(`${this.endpoint}/enviar-mensagem`, model);
+    return this.httpPost(`${this.endpoint}/enviar-mensagem?ip=${ip}&porta=${porta}&mensagem=${mensagem}`, null);
   }
 
   // updateListId(payload: Dashboard): Observable<any> {
