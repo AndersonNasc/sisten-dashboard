@@ -95,7 +95,12 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
 
 
 
-  openConfirmDialog(): void {
-    this.dialog.open(MessageDeleteComponent);
+  openConfirmDialog(id:string): void {
+    
+debugger
+    const dialogRef = this.dialog.open(MessageDeleteComponent, {
+      width: '450px',
+      data: {id: id, }
+    });
   }
 }

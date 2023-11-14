@@ -4,6 +4,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 //Service
 import { DasboardService } from 'src/app/core/service/dashboard.service';
 
+export interface DialogData {
+  id: string;
+}
+
 @Component({
   selector: 'app-message-delete',
   templateUrl: './message-delete.component.html',
@@ -11,16 +15,19 @@ import { DasboardService } from 'src/app/core/service/dashboard.service';
 })
 export class MessageDeleteComponent implements OnInit {
 
-  elementId: any;
+  elementId!: string;
 
   constructor(
     private dasboardService: DasboardService,
     private router: Router,
     public dialogRef: MatDialogRef<MessageDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string }
+    @Inject(MAT_DIALOG_DATA) public data: { id: string }
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    debugger
+    this.elementId = this.data.id;
+  }
 
   cancel() {
     this.dialogRef.close(false);

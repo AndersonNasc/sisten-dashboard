@@ -7,7 +7,17 @@
     <div class="col-12 d-flex align-items-center justify-content-center">
       <mat-card class="cardWithShadow boxed-auth">
         <mat-card-content class="p-32">
-            <h1 class="title">Painel</h1>
+            <div class="d-flex justify-content-between">
+              <h1 class="title">Painel</h1>
+              <div>
+              <!-- Ativo -->
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+              >Ativo</mat-label
+              >
+              <mat-slide-toggle [checked]="isCheckedSlide" formControlName="flag_ativo" (change)="changeSlide($event)"></mat-slide-toggle>
+              </div>
+          </div>
+           
           <form class="m-t-30"  [formGroup]="formDashboard">
             <div class="col-12 row">
               <div class="col-6">
@@ -84,20 +94,7 @@
                   <input matInput formControlName="porta"/>
                 </mat-form-field>
 
-                <!-- status -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >Ativo</mat-label
-                >
-                <!-- <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput formControlName="status"/> -->
-
-                  <!-- </mat-form-field> -->
-                  <!-- active -->
-                  <mat-slide-toggle [checked]="isCheckedSlide" formControlName="flag_ativo" (change)="changeSlide($event)"></mat-slide-toggle>
+                
               </div>
             </div>
             <!-- register -->

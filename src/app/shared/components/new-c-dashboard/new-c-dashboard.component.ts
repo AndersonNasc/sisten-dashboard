@@ -90,7 +90,7 @@ export class NewCDashboardComponent implements OnInit {
         porta:this.formDashboard.controls['porta'].value,
         flag_ativo: true,
         flag_msg_fixa: false,
-        // ultimo_status: '',
+        ultimo_status: '',
         // porta: this.formDashboard.controls['porta'].value,
       };
 

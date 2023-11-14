@@ -108,7 +108,7 @@
             </td>
           </ng-container>
 
-          <!-- Status Column -->
+          <!-- Ativo Column -->
           <ng-container matColumnDef="active">
             <th
               mat-header-cell
@@ -122,14 +122,14 @@
                 <span
                   class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
                 >
-                  Habilitado
+                  HABILITADO
                 </span>
               </ng-template>
               <ng-template [ngIf]="element.flag_ativo == false">
                 <span
                   class="bg-light-error text-danger-emphasis bg-danger rounded p-1 f-w-600 p-6 p-y-4 f-s-12"
                 >
-                  Desabilitado
+                  DESABILITADO
                 </span>
               </ng-template>
             </td>
@@ -145,7 +145,7 @@
               Status
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              <ng-template [ngIf]="element.ultimo_status == 'SUCESSO'">
+              <ng-template [ngIf]="element.ultimo_status == 'NORMAL'">
                 <span
                   class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
                 >
@@ -154,7 +154,7 @@
               </ng-template>
               <ng-template
                 [ngIf]="
-                  element.ultimo_status != 'SUCESSO' &&
+                  element.ultimo_status != 'NORMAL' &&
                   element.ultimo_status != '' &&
                   element.ultimo_status != null
                 "
@@ -203,7 +203,7 @@
                 class="style-icon delete"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                (click)="openConfirmDialog()"
+                (click)="openConfirmDialog(element._id)"
                 >delete</mat-icon
               >
             </td>
@@ -213,7 +213,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <mat-paginator
-          [pageSizeOptions]="[5, 10, 20]"
+          [pageSizeOptions]="[10, 20]"
           showFirstLastButtons
           aria-label="Select page of periodic elements"
         >
@@ -238,45 +238,3 @@
 
 
 
-
-<!-- Modal -->
-<!-- <div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
- 
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" >
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Apagar Painel</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          O painel não poderá ser recuperado. Tem certeza que gostaria de apagar
-          o painel.
-        </p>
-      </div>
-      <div class="modal-footer"  ([(ngModel)]="dashboard")>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Fechar
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="delete(element.id)"
-        >
-          Apagar
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
