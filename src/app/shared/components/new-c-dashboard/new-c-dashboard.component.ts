@@ -21,6 +21,7 @@ export class NewCDashboardComponent implements OnInit {
   route: string = '';
   ehNewForm: boolean = false;
   isCheckedSlide: boolean = true;
+  isCheckedSlide: boolean = true;
 
   constructor(
     private router: Router,
@@ -30,6 +31,8 @@ export class NewCDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route = this.activatedRoute.snapshot.url[0].path;
+    this.createForm();
     this.route = this.activatedRoute.snapshot.url[0].path;
     this.createForm();
 
