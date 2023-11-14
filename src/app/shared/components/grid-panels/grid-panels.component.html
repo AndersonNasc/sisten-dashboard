@@ -5,12 +5,14 @@
     <mat-card-content class="p-24">
       <div class="d-flex justify-content-between">
         <mat-card-title class="title">Paineis</mat-card-title>
-        <mat-icon
+        <button
           title="Adicionar Paineis"
-          class="style-icon add"
           (click)="newDashboard()"
-          >add</mat-icon
+          class="btn btn-info my-1 text-white"
+          type="button"
         >
+          Adicionar Painel
+        </button>
       </div>
 
       <div class="table-responsive m-t-16">
@@ -107,7 +109,7 @@
           </ng-container>
 
           <!-- Status Column -->
-          <ng-container matColumnDef="status">
+          <ng-container matColumnDef="active">
             <th
               mat-header-cell
               *matHeaderCellDef
@@ -118,23 +120,16 @@
             <td mat-cell *matCellDef="let element">
               <ng-template [ngIf]="element.flag_ativo == true">
                 <span
-                  class="bg-light-primary text-primary bg-info p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
+                  class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
                 >
-                   Ativo 
+                  Habilitado
                 </span>
               </ng-template>
-              <!-- <ng-template [ngIf]="element.flag_ativo == 'Alerta'">
-                <span
-                  class="bg-light-warning text-warning-emphasis bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
-                >
-                  {{ element.status | titlecase }}
-                </span>
-              </ng-template> -->
               <ng-template [ngIf]="element.flag_ativo == false">
                 <span
                   class="bg-light-error text-danger-emphasis bg-danger rounded p-1 f-w-600 p-6 p-y-4 f-s-12"
                 >
-                Inativo
+                  Desabilitado
                 </span>
               </ng-template>
             </td>
@@ -150,19 +145,38 @@
               Status
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              {{ element.ultimo_status }}
+              <ng-template [ngIf]="element.ultimo_status == 'SUCESSO'">
+                <span
+                  class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
+                >
+                  {{ element.ultimo_status }}
+                </span>
+              </ng-template>
+              <ng-template
+                [ngIf]="
+                  element.ultimo_status != 'SUCESSO' &&
+                  element.ultimo_status != '' &&
+                  element.ultimo_status != null
+                "
+              >
+                <span
+                  class="bg-light-warning text-white bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
+                >
+                  {{ element.ultimo_status }}
+                </span>
+              </ng-template>
             </td>
           </ng-container>
 
-          <!-- Update Column -->
+          <!-- Mensagem Column -->
           <ng-container matColumnDef="message">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <mat-icon
-                (click)="openDialog(element._id)"
+                (click)="openDialog(element.ip, element.porta, element.nome)"
+                class="style-icon message"
                 title="Mensagens"
-                class="style-icon update"
-                >edit</mat-icon
+                >message</mat-icon
               >
             </td>
           </ng-container>
@@ -187,7 +201,9 @@
               <mat-icon
                 title="Apagar"
                 class="style-icon delete"
-                (click)="delete(element.id)"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="openConfirmDialog()"
                 >delete</mat-icon
               >
             </td>
@@ -203,6 +219,10 @@
         >
         </mat-paginator>
       </div>
+      <div class="d-flex justify-content-between">
+        <mat-card-title class="title"></mat-card-title>
+        <button class="btn btn-warning text-white my-1" type="button">Logs</button>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
@@ -210,3 +230,53 @@
 
 
 
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<!-- <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+ 
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Apagar Painel</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          O painel não poderá ser recuperado. Tem certeza que gostaria de apagar
+          o painel.
+        </p>
+      </div>
+      <div class="modal-footer"  ([(ngModel)]="dashboard")>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="delete(element.id)"
+        >
+          Apagar
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->

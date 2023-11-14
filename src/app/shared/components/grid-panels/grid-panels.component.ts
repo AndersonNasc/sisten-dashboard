@@ -10,6 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+import { MessageDeleteComponent } from '../message-delete/message-delete.component';
+
 //Components
 import { MessageComponent }from 'src/app/shared/components/message/message.component'
 @Component({
@@ -25,7 +27,7 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
     'idPoint',
     'model',
     'door',
-    'status',
+    'active',
     'last_status',
     'message',
     'update',
@@ -59,18 +61,18 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   }
 
   updateDashboard(user: Dashboard) {
-    // this.router.navigate(['edit-dashboard', user.id]);
+    this.router.navigate(['edit-dashboard', user._id]);
   }
 
-  delete(id: number) {
-    // this.dasboardService.deleteListId(id).subscribe((res) => {
-    //   this.router.navigate(['screen-panels']);
-    //   this.getListUsers();
-    // });
-  }
+  // delete(id: string) {
+  //   this.dasboardService.deleteListId(id).subscribe((res) => {
+  //     this.router.navigate(['screen-panels']);
+  //     this.getListUsers();
+  //   });
+  // }
 
   newDashboard() {
-    // this.router.navigate(['new-dashboard']);
+    this.router.navigate(['new-dashboard']);
   }
 
 
@@ -78,10 +80,10 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   animal!: string;
   name!: string;
 
-  openDialog(id:string): void {
+  openDialog(ip:string, porta:string, painel:string): void {
     const dialogRef = this.dialog.open(MessageComponent, {
-      width: '250px',
-      data: {id: id, animal: this.animal}
+      width: '450px',
+      data: {ip: ip, porta: porta, painel:painel}
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
@@ -90,4 +92,10 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
     });
   }
 
+
+
+
+  openConfirmDialog(): void {
+    this.dialog.open(MessageDeleteComponent);
+  }
 }

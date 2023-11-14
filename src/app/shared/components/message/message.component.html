@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>Envio de Mensagem</h1>
+<h1 mat-dialog-title>Enviar Mensagem, painel: {{namePainel}}</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <textarea matInput [(ngModel)]="message" placeholder="Enter text"></textarea>
+  <mat-form-field class="w-100" >
+    <textarea matInput class="w-100" height="65" [(ngModel)]="message" placeholder="Enter text"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

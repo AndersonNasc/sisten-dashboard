@@ -15,6 +15,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { NewCDashboardComponent } from './components/new-c-dashboard/new-c-dashboard.component';
 import { NewCParameterizationComponent } from './components/new-c-parameterization/new-c-parameterization.component';
 import { MessageComponent } from './components/message/message.component';
+import { MessageDeleteComponent } from './components/message-delete/message-delete.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MessageComponent } from './components/message/message.component';
     NewCDashboardComponent,
     NewCParameterizationComponent,
     MessageComponent,
+    MessageDeleteComponent,
   ],
   imports: [
     CommonModule,

@@ -20,7 +20,7 @@
                   class="w-100"
                   color="primary"
                 >
-                  <input matInput  formControlName="name"/>
+                  <input matInput  formControlName="nome"/>
                 </mat-form-field>
 
                 <!-- ip -->
@@ -44,7 +44,7 @@
                   class="w-100"
                   color="primary"
                 >
-                  <input matInput formControlName="idPoint"/>
+                  <input matInput formControlName="id_ponto"/>
                 </mat-form-field>
               </div>
               <div class="col-6">
@@ -57,31 +57,58 @@
                   class="w-100"
                   color="primary"
                 >
-                  <input matInput formControlName="model"/>
+                  <input matInput formControlName="modelo"/>
                 </mat-form-field>
 
-                <!-- status -->
+                <!-- Patrimonio -->
                 <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >Status</mat-label
+                  >Patrimonio</mat-label
                 >
                 <mat-form-field
                   appearance="outline"
                   class="w-100"
                   color="primary"
                 >
-                  <input matInput formControlName="status"/>
+                  <input matInput formControlName="patrimonio"/>
                 </mat-form-field>
+
+                <!-- Porta -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >Porta</mat-label
+                >
+                <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput formControlName="porta"/>
+                </mat-form-field>
+
+                <!-- status -->
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                  >Ativo</mat-label
+                >
+                <!-- <mat-form-field
+                  appearance="outline"
+                  class="w-100"
+                  color="primary"
+                >
+                  <input matInput formControlName="status"/> -->
+
+                  <!-- </mat-form-field> -->
+                  <!-- active -->
+                  <mat-slide-toggle [checked]="isCheckedSlide" formControlName="flag_ativo" (change)="changeSlide($event)"></mat-slide-toggle>
               </div>
             </div>
             <!-- register -->
-            <!-- <a
+            <a
               [routerLink]="['/']"
               mat-flat-button
               class="w-100 btn-register"
               (click)="save()"
             >
               Salvar
-            </a> -->
+            </a>
           </form>
         </mat-card-content>
       </mat-card>

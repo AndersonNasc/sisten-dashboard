@@ -17,25 +17,27 @@ export class DasboardService extends HttpBaseService {
     return this.httpGet(this.endpoint);
   }
 
-  getListId(id: number): Observable<any> {
+  getListId(id: string): Observable<any> {
+    debugger
     return this.httpGet(`${this.endpoint}/${id}`);
   }
+
   setMessage(ip: string, mensagem: string, porta: string): Observable<any> {
     var model = {
-      "id":ip,
+      "ip":ip,
       "porta":porta,
       "mensagem":mensagem
       }
-    return this.httpPost(`${this.endpoint}/enviar-mensagem`, model);
+    return this.httpPost(`${this.endpoint}/enviar-mensagem?ip=${ip}&porta=${porta}&mensagem=${mensagem}`, null);
   }
 
-  // updateListId(payload: Dashboard): Observable<any> {
-  //   return this.httpPut(`${this.endpoint}/${payload.id}`, payload);
-  // }
+  updateListId(payload: Dashboard): Observable<any> {
+    return this.httpPut(`${this.endpoint}/${payload._id}`, payload);
+  }
 
-  // deleteListId(id: number): Observable<any> {
-  //   return this.httpDelete(`${this.endpoint}/${id}`);
-  // }
+  deleteListId(id: string): Observable<any> {
+    return this.httpDelete(`${this.endpoint}/${id}`);
+  }
 
   create(payload: Dashboard): Observable<any> {
     return this.httpPost(`${this.endpoint}`, payload);
