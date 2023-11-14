@@ -21,7 +21,6 @@ export class NewCDashboardComponent implements OnInit {
   route: string = '';
   ehNewForm: boolean = false;
   isCheckedSlide: boolean = true;
-  isCheckedSlide: boolean = true;
 
   constructor(
     private router: Router,
