@@ -1,6 +1,6 @@
 <!-- <img src="../../../../assets/images/logos/painel.svg" /> -->
 
-<div class="col-lg-8">
+<div style="width: 96%;">
   <mat-card class="cardWithShadow">
     <mat-card-content class="p-24">
       <div class="d-flex justify-content-between">
@@ -26,7 +26,7 @@
               <div class="d-flex align-items-center">
                 <img
                   src="../../../../assets/images/logos/analogicatec.web7039.uni5_.net-painel-eletronico-de-senha-guiche-5-digitos-painel-eletronico-de-senha-guiche-5-digitos-display3.png"
-                  alt="users" width="80" class="rounded-circle" />
+                  alt="users" width="60" class="rounded-circle" />
               </div>
             </td>
           </ng-container>
@@ -78,6 +78,16 @@
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
               {{ element.porta }}
+            </td>
+          </ng-container>
+
+          <!-- Patrimonio Column -->
+          <ng-container matColumnDef="patrimonio">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+              Patrimônio
+            </th>
+            <td mat-cell *matCellDef="let element" class="mat-body-1">
+              {{ element.patrimonio }}
             </td>
           </ng-container>
 
@@ -136,12 +146,13 @@
               </ng-template>
             </td>
           </ng-container>
-
           <!-- Mensagem Column -->
-          <!-- Mensagem Column -->
-          <ng-container matColumnDef="message">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+          <ng-container matColumnDef="message" >
+           
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+              Mensagem
+            </th>
+            <td mat-cell *matCellDef="let element" >
               <mat-icon
                 (click)="openDialog(element.ip, element.porta, element.nome)"
                 class="style-icon message"
@@ -149,20 +160,25 @@
                 >message</mat-icon
               >
             </td>
+          
           </ng-container>
 
           <!-- Update Column -->
           <ng-container matColumnDef="update">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+              Atualizar
+            </th>
+            <td mat-cell *matCellDef="let element" class="update-cell">
               <mat-icon (click)="updateDashboard(element)" title="Editar" class="style-icon update">edit</mat-icon>
             </td>
           </ng-container>
 
           <!-- Delete Column -->
           <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+              Excluir
+            </th>
+            <td mat-cell *matCellDef="let element" >
               <mat-icon
                 title="Apagar"
                 class="style-icon delete"
@@ -178,14 +194,13 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <mat-paginator
-          [pageSizeOptions]="[10, 20]"
+          [pageSizeOptions]="[20]"
           showFirstLastButtons
           aria-label="Select page of periodic elements"
         >
         </mat-paginator>
       </div>
-      <div class="d-flex justify-content-between">
-        <mat-card-title class="title"></mat-card-title>
+      <div class="d-flex justify-content-between" *ngId="perfilAdmin">
         <button class="btn btn-warning text-white my-1" type="button">Logs</button>
       </div>
     </mat-card-content>

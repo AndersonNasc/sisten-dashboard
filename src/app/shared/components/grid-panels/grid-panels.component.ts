@@ -27,6 +27,7 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
     'idPoint',
     'model',
     'door',
+    'patrimonio',
     'active',
     'last_status',
     'message',
@@ -35,6 +36,7 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   ];
   dataSource = new MatTableDataSource<Dashboard>();
   dashboard: Dashboard[] = [];
+  perfilAdmin: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -46,6 +48,16 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getListUsers();
+
+    this.perfilAdmin = (sessionStorage.getItem('perfil') == "admin" ? true : false);
+    this.checkPerfilAdmin();   
+  }
+
+  checkPerfilAdmin(){
+    if(!this.perfilAdmin){
+      const itemsToRemove = ['message', 'delete', 'update'];
+      this.displayedColumns = this.displayedColumns.filter(item => !itemsToRemove.includes(item));
+    }
   }
 
   ngAfterViewInit() {

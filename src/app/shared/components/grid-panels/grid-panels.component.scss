@@ -23,3 +23,30 @@
     color: rgb(23, 24, 24);
     cursor: pointer;
 }
+
+/* Structure */
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  
+  
+  mat-cell{
+    display:flex !important;
+    justify-content:center!important;
+    
+  }
+  
+  mat-header-cell {
+    display:flex;
+    justify-content:center;
+  }
+  
+  

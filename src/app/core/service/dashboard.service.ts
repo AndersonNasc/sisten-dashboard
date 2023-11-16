@@ -7,7 +7,7 @@ import { Dashboard } from 'src/app/shared/models/dashboard';
   providedIn: 'root',
 })
 export class DasboardService extends HttpBaseService {
-  private endpoint = 'v1/painel';
+  private endpoint = 'painel';
 
   constructor(protected override readonly injector: Injector) {
     super(injector);

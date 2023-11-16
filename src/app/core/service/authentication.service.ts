@@ -20,12 +20,20 @@ export class AuthenticationService extends HttpBaseService {
   }
 
   login(login: Login): Observable<any> {
-    return this.httpPost('authentication', login).pipe(
+    return this.httpPost('user/authenticate', login).pipe(
+    //  return this.httpPost('authentication', login).pipe(
       map((response) => {
-        sessionStorage.setItem('token', response.token);
-        this.subjectUsuario.next(response.user);
-        this.subjectLogin.next(true);
-        return response.user;
+        debugger
+        var valid: boolean = false;
+        if(response.perfil)
+        {
+          sessionStorage.setItem('perfil', response.perfil);
+          this.subjectUsuario.next(response);
+          this.subjectLogin.next(true);
+          valid = true;
+        }
+       
+        return valid;
       })
     );
   }

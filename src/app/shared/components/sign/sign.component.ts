@@ -27,24 +27,27 @@ export class SignComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['',Validators.compose([Validators.required, Validators.minLength(4)])]
+      usuario: ['', Validators.compose([Validators.required, Validators.email])],
+      senha: ['',Validators.compose([Validators.required, Validators.minLength(2)])]
     });
   }
 
   login() {
     this.authLogin = Object.assign('', this.authLogin, this.loginForm.value);
-    this.authLogin.email = this.authLogin.email.toLowerCase();
+    this.authLogin.usuario = this.authLogin.usuario;
     console.log(this.authLogin);
 
-    this.authenticationService.login({email: this.authLogin.email, password: this.authLogin.password}).subscribe(
-      (user) => {
-        if (user?.id) {
+    this.authenticationService.login({usuario: this.authLogin.usuario, senha: this.authLogin.senha}).subscribe(
+      (valid) => {
+        if (valid) {
           this.router.navigateByUrl('home');
         }
       },
       (error) => {
-        this._snackBar.open('Email ou senha incorretos');
+        this._snackBar.open('Usuário ou senha incorretos');
+        setTimeout(() => {
+          this._snackBar.dismiss();
+        }, 3000);
       }
     );
   }

@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   menu: any = [];
+  perfilAdmin:boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.perfilAdmin = (sessionStorage.getItem('perfil') == "admin" ? true : false);
   }
 
 
