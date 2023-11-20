@@ -32,8 +32,8 @@ export class NewCDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.route = this.activatedRoute.snapshot.url[0].path;
     this.createForm();
-    this.route = this.activatedRoute.snapshot.url[0].path;
-    this.createForm();
+    // this.route = this.activatedRoute.snapshot.url[0].path;
+    // this.createForm();
 
     if (this.route === 'edit-dashboard') {
       this.id = this.activatedRoute.snapshot.url[1].path;
@@ -45,21 +45,19 @@ export class NewCDashboardComponent implements OnInit {
 
   createForm() {
     this.formDashboard = this.formBuilder.group({
-      nome: ['', Validators.required],
-      ip: ['', Validators.required],
-      id_ponto: ['', Validators.required],
-      modelo: ['', Validators.required],
-      ultimo_status: ['', Validators.required],
-      flag_ativo: ['', Validators.required],
-      porta: ['', Validators.required],
-      msg_fixa: ['', Validators.required],
-      patrimonio: ['', Validators.required],
-      // imagePath: [''],
+      nome: new FormControl('', Validators.required),
+      ip: new FormControl('', Validators.required),
+      id_ponto: new FormControl('', Validators.required),
+      modelo: new FormControl('', Validators.required),
+      ultimo_status: new FormControl('', Validators.required),
+      flag_ativo: new FormControl('', Validators.required),
+      porta: new FormControl('', Validators.required),
+      msg_fixa: new FormControl('', Validators.required),
+      patrimonio: new FormControl('', Validators.required),
     });
   }
 
   getDashboardId() {
-    debugger
     this.dasboardService
       .getListId(this.id)
       .subscribe((dashboard: Dashboard) => {
@@ -71,38 +69,36 @@ export class NewCDashboardComponent implements OnInit {
         this.formDashboard.controls['ultimo_status'].setValue(dashboard.ultimo_status);
         this.formDashboard.controls['flag_ativo'].setValue(dashboard.flag_ativo);
         this.formDashboard.controls['porta'].setValue(dashboard.porta);
-        this.formDashboard.controls['msg_fixa'].setValue(
-          this.isCheckedSlide
-        );
+        this.formDashboard.controls['msg_fixa'].setValue(this.isCheckedSlide);
+        this.formDashboard.controls['patrimonio'].setValue(dashboard.patrimonio);
         console.log(this.dashboard);
       });
   }
 
   save() {
-    debugger
     //verifica se foi alterado para salvar
-    if (this.formDashboard.touched && this.formDashboard.dirty) {
-      const payload: Dashboard = {
-        nome: this.formDashboard.controls['nome'].value,
-        ip: this.formDashboard.controls['ip'].value,
-        id_ponto: this.formDashboard.controls['id_ponto'].value,
-        modelo: this.formDashboard.controls['modelo'].value,
-        msg_fixa:'',
-        patrimonio:this.formDashboard.controls['patrimonio'].value,
-        porta:this.formDashboard.controls['porta'].value,
-        flag_ativo: true,
-        flag_msg_fixa: false,
-        ultimo_status: '',
-        // porta: this.formDashboard.controls['porta'].value,
-      };
-
-      if (this.ehNewForm) {
-        this.createUser(payload);
-      } else {
-        payload._id = this.dashboard._id;
-        this.editUser(payload);
-      }
+    
+    const payload: Dashboard = {
+      nome: this.formDashboard.controls['nome'].value,
+      ip: this.formDashboard.controls['ip'].value,
+      id_ponto: this.formDashboard.controls['id_ponto'].value,
+      modelo: this.formDashboard.controls['modelo'].value,
+      msg_fixa:'',
+      patrimonio:this.formDashboard.controls['patrimonio'].value ?? "",
+      porta:this.formDashboard.controls['porta'].value,
+      flag_ativo: this.isCheckedSlide,
+      flag_msg_fixa: false,
+      ultimo_status: '',
+      // porta: this.formDashboard.controls['porta'].value,
+    };
+    
+    if (this.ehNewForm) {
+      this.createUser(payload);
+    } else {
+      payload._id = this.dashboard._id;
+      this.editUser(payload);
     }
+    
     this.router.navigate(['screen-panels']);
   }
 

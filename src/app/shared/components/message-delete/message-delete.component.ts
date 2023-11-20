@@ -25,7 +25,6 @@ export class MessageDeleteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
     this.elementId = this.data.id;
   }
 

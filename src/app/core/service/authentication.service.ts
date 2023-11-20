@@ -21,9 +21,7 @@ export class AuthenticationService extends HttpBaseService {
 
   login(login: Login): Observable<any> {
     return this.httpPost('user/authenticate', login).pipe(
-    //  return this.httpPost('authentication', login).pipe(
       map((response) => {
-        debugger
         var valid: boolean = false;
         if(response.perfil)
         {
@@ -32,10 +30,19 @@ export class AuthenticationService extends HttpBaseService {
           this.subjectLogin.next(true);
           valid = true;
         }
+
        
-        return valid;
+
+        // sessionStorage.setItem('perfil', "admin");
+        // this.subjectUsuario.next("admin");
+        // this.subjectLogin.next(true);
+        // valid = true;
+        
+         return valid;
       })
     );
+
+    
   }
 
   logout() {
@@ -45,7 +52,7 @@ export class AuthenticationService extends HttpBaseService {
   }
 
   userIsLogged(): Observable<any> {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('perfil');
 
     if (token) {
       this.subjectLogin.next(true);

@@ -27,7 +27,7 @@ export class SignComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      usuario: ['', Validators.compose([Validators.required, Validators.email])],
+      usuario: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       senha: ['',Validators.compose([Validators.required, Validators.minLength(2)])]
     });
   }

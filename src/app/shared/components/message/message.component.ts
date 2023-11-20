@@ -35,10 +35,8 @@ export class MessageComponent implements OnInit {
 
 
     save() {
-      debugger
       this.dasboardService.setMessage(this.data.ip, this.message, this.data.porta).subscribe(
         (result: any)  => {
-          debugger
         this.dialogRef.close();
 
       });

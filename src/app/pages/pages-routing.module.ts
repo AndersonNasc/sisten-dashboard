@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { ScreenPanelsComponent } from './screen-panels/screen-panels.component';
 import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
 import { ParameterizationComponent } from './parameterization/parameterization.component';
+import { LogComponent } from './log/log.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'parametrization',
     component: ParameterizationComponent,
     title: 'Parametrização',
+  },
+  {
+    path: 'eventos',
+    component: LogComponent,
+    title: 'Eventos',
   },
 
 ];

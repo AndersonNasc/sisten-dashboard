@@ -16,6 +16,7 @@ import { NewCDashboardComponent } from './components/new-c-dashboard/new-c-dashb
 import { NewCParameterizationComponent } from './components/new-c-parameterization/new-c-parameterization.component';
 import { MessageComponent } from './components/message/message.component';
 import { MessageDeleteComponent } from './components/message-delete/message-delete.component';
+import { LogCompComponent } from './components/log-comp/log-comp.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MessageDeleteComponent } from './components/message-delete/message-dele
     NewCParameterizationComponent,
     MessageComponent,
     MessageDeleteComponent,
+    LogCompComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +49,7 @@ import { MessageDeleteComponent } from './components/message-delete/message-dele
     MenuComponent,
     NewCDashboardComponent,
     NewCParameterizationComponent,
+    LogCompComponent
   ],
 })
 export class SharedModule {}

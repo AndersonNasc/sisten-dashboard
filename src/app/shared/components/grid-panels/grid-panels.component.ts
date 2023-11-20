@@ -47,7 +47,8 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.getListUsers();
+    
+    
 
     this.perfilAdmin = (sessionStorage.getItem('perfil') == "admin" ? true : false);
     this.checkPerfilAdmin();   
@@ -61,6 +62,9 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    setTimeout(() => {
+      this.getListUsers();
+    }, 400);
     this.dataSource.paginator = this.paginator;
   }
 
@@ -108,8 +112,6 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
 
 
   openConfirmDialog(id:string): void {
-    
-debugger
     const dialogRef = this.dialog.open(MessageDeleteComponent, {
       width: '450px',
       data: {id: id, }

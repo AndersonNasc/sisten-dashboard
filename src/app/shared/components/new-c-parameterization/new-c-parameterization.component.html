@@ -1,22 +1,86 @@
 <div class="col-lg-6">
-    <!-- --------------------------------------------------- -->
-    <!-- List with Selection -->
-    <!-- --------------------------------------------------- -->
-    <mat-card class="b-1 shadow-none">
-      <mat-card-header>
-        <mat-card-title class="title">Parametrização de Paineis</mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="b-t-1">
-        <mat-selection-list #shoes>
-          <mat-list-option *ngFor="let shoe of typesOfShoes">
-            {{ shoe }}
-          </mat-list-option>
-        </mat-selection-list>
+  <!-- --------------------------------------------------- -->
+  <!-- List with Selection -->
+  <!-- --------------------------------------------------- -->
+  <mat-card class="b-1 shadow-none">
+    <mat-card-header>
+      <mat-card-title class="title">Parametrização de Paineis</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="b-t-1">
+      <div class="d-flex justify-content">
+        <form class="w-100 mt-4" [formGroup]="formDashboard">
+          <div class="col-12 row">
+            <!-- Tempo Transmitir Mensagem(Min) -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Tempo Transmitir Mensagem(Min)</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="tempoTransmitirMensagemMin" />
+              </mat-form-field>
+            </div>
 
-        <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded title">
-          Paineis Selecionados: {{ shoes.selectedOptions.selected.length }}
-        </p>
-      </mat-card-content>
-    </mat-card>
-  </div>
+            <!-- Tempo Zerar Paineis(Horas) -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Tempo Zerar Paineis(Horas)</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="tempoZerarPaineisHoras" />
+              </mat-form-field>
+            </div>
 
+            <!-- Tempo Transmitir Mensagem Fixa(Horas) -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Tempo Transmitir Mensagem
+                Fixa(Horas)</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="tempoTransmitirMensagemFixaHora" />
+              </mat-form-field>
+            </div>
+
+            <!-- Tempo Ajuste Data Hora(Horas) -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Tempo Ajuste Data Hora(Horas)</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="tempoAjusteDataHoraHoras" />
+              </mat-form-field>
+            </div>
+
+            <!-- Socket Timeout -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Socket Timeout</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="socketTimeout" />
+              </mat-form-field>
+            </div>
+
+            <!-- Socket Wait Receive -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Socket Wait Receive</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="socketWaitReceive" />
+              </mat-form-field>
+            </div>
+
+            <!-- Retry Painel Send Mensage -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Retry Painel Send Mensage</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="retryPainelSendMensage" />
+              </mat-form-field>
+            </div>
+
+            <!-- URL Cittati -->
+            <div class="col-6">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">URL Cittati</mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput formControlName="endPointServerRepository" />
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- register -->
+          <button title="Salvar" (click)="update()" class="btn btn-info my-1 text-white col-3 ml-4" type="button">
+            Salvar
+          </button>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

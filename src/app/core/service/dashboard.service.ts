@@ -18,7 +18,6 @@ export class DasboardService extends HttpBaseService {
   }
 
   getListId(id: string): Observable<any> {
-    debugger
     return this.httpGet(`${this.endpoint}/${id}`);
   }
 
@@ -36,7 +35,7 @@ export class DasboardService extends HttpBaseService {
   }
 
   deleteListId(id: string): Observable<any> {
-    return this.httpDelete(`${this.endpoint}/${id}`);
+    return this.httpDelete(`${this.endpoint}?id_painel=${id}`);
   }
 
   create(payload: Dashboard): Observable<any> {
