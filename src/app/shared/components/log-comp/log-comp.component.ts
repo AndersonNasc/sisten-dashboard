@@ -21,14 +21,14 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class LogCompComponent { 
 
-  displayedColumns: string[] = [
-    '_id',
+  displayedColumns: string[] = [    
     'descricao_evento',
     'tipo_evento',
     'data_evento',
   ];
   dataSource = new MatTableDataSource<Logs>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  exibirSpinner:boolean = true;
 
   constructor(
     private _logService: LogService,
@@ -45,8 +45,11 @@ export class LogCompComponent {
 
   getLogs(){
     this._logService.getLogs().subscribe((response:any) => {
-      this.dataSource.data = response;
-      console.log(this.dataSource.data)
+      if(response.length > 0){
+        this.exibirSpinner = false;
+        this.dataSource.data = response;
+        console.log(this.dataSource.data)
+      }
     });
   }
 }

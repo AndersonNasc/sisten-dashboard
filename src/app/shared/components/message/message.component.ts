@@ -6,7 +6,8 @@ import { DasboardService } from 'src/app/core/service/dashboard.service';
 export interface DialogData {
   ip: string;
   porta: string;
-  painel: string
+  painel: string;
+  painelId:string
 }
 
 @Component({
@@ -20,6 +21,7 @@ export class MessageComponent implements OnInit {
   ip!:string;
   door!:string;
   namePainel!:string;
+  painelId!:string;
   //dialogRef: any;
 
   constructor(
@@ -35,7 +37,7 @@ export class MessageComponent implements OnInit {
 
 
     save() {
-      this.dasboardService.setMessage(this.data.ip, this.message, this.data.porta).subscribe(
+      this.dasboardService.setMessage(this.data.ip, this.message, this.data.porta, this.data.painelId).subscribe(
         (result: any)  => {
         this.dialogRef.close();
 

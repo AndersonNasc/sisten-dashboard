@@ -1,109 +1,77 @@
-<div
-  class="blank-layout-container d-flex justify-content-center align-items-center bg-light-primary mt-5 "
->
-  <div
-    class="position-relative row w-100 h-100 bg-gredient justify-content-center"
-  >
+<div class="blank-layout-container d-flex justify-content-center align-items-center bg-light-primary mt-5 ">
+  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
     <div class="col-12 d-flex align-items-center justify-content-center">
       <mat-card class="cardWithShadow boxed-auth">
         <mat-card-content class="p-32">
-            <div class="d-flex justify-content-between">
-              <h1 class="title">Painel</h1>
-              <div>
-              <!-- Ativo -->
-              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >Ativo</mat-label
-              >
-              <mat-slide-toggle [checked]="isCheckedSlide" formControlName="flag_ativo" (change)="changeSlide($event)"></mat-slide-toggle>
-              </div>
+          <div class="d-flex justify-content-between">
+            <h1 class="title">Painel</h1>
+
           </div>
-           
-          <form class="m-t-30"  [formGroup]="formDashboard">
+          
+          <form class="m-t-30" [formGroup]="formDashboard">
             <div class="col-12 row">
+              <div style="margin-bottom: 15px; margin-left: 80%;">
+                <!-- Ativo -->
+                <mat-slide-toggle [checked]="isCheckedSlide" formControlName="flag_ativo" (change)="changeSlide($event)">
+                  <span *ngIf="showLabelSlide"><i class="fa-duotone fa-box-archive"></i>Habilitado</span>
+                  <span *ngIf="!showLabelSlide"><i class="fa-duotone fa-paperclip"></i> Desabilitado</span>
+                </mat-slide-toggle>
+              </div>
+              <br>
               <div class="col-6">
                 <!-- name dashboard -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >Nome do Painel</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput  formControlName="nome"/>
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Nome do Painel</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="nome" />
                 </mat-form-field>
 
                 <!-- ip -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >IP</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput formControlName="ip"/>
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">IP</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="ip" />
                 </mat-form-field>
 
                 <!-- id ponto -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >ID Ponto</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput formControlName="id_ponto"/>
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">ID Ponto</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="id_ponto" />
                 </mat-form-field>
               </div>
               <div class="col-6">
                 <!-- model -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >Modelo</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput formControlName="modelo"/>
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Modelo</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="modelo" />
                 </mat-form-field>
 
                 <!-- Patrimonio -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >Patrimonio</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput formControlName="patrimonio"/>
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Patrimonio</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="patrimonio" />
                 </mat-form-field>
 
                 <!-- Porta -->
-                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-                  >Porta</mat-label
-                >
-                <mat-form-field
-                  appearance="outline"
-                  class="w-100"
-                  color="primary"
-                >
-                  <input matInput formControlName="porta"/>
+                <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Porta</mat-label>
+                <mat-form-field appearance="outline" class="w-100" color="primary">
+                  <input matInput formControlName="porta" />
                 </mat-form-field>
 
-                
+                <!-- Msg Fixa -->
+                <mat-slide-toggle [checked]="isCheckedCampoMsgFixaSlide" formControlName="flag_msg_fixa"
+                  (change)="changeCampoMsgFixaSlide($event)">
+                  <span *ngIf="showCampoMsgFixaSlide"><i class="fa-duotone fa-box-archive"></i>Msg Fixa</span>
+                  <span *ngIf="!showCampoMsgFixaSlide"><i class="fa-duotone fa-paperclip"></i> Msg Cittati</span>
+                </mat-slide-toggle>
+
+                <mat-form-field *ngIf="showCampoMsgFixaSlide" appearance="outline" class="w-100" color="primary">
+                  <textarea matInput class="w-100" height="65" formControlName="msg_fixa" maxlength="4000" placeholder="Enter text"></textarea>
+                </mat-form-field>
+
+
               </div>
             </div>
             <!-- register -->
-            <a
-              [routerLink]="['/']"
-              mat-flat-button
-              class="w-100 btn-register"
-              (click)="save()"
-            >
+            <a style="margin-top:2vw" [routerLink]="['/']" mat-flat-button class="w-100 btn-register" (click)="save()">
               Salvar
             </a>
           </form>

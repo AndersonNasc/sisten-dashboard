@@ -17,6 +17,7 @@ import { NewCParameterizationComponent } from './components/new-c-parameterizati
 import { MessageComponent } from './components/message/message.component';
 import { MessageDeleteComponent } from './components/message-delete/message-delete.component';
 import { LogCompComponent } from './components/log-comp/log-comp.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LogCompComponent } from './components/log-comp/log-comp.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     SignComponent,

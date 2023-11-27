@@ -8,12 +8,13 @@ import { Dashboard } from '../../models/dashboard';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MessageDeleteComponent } from '../message-delete/message-delete.component';
 
 //Components
-import { MessageComponent }from 'src/app/shared/components/message/message.component'
+import { MessageComponent } from 'src/app/shared/components/message/message.component'
+import { interval } from 'rxjs';
 @Component({
   selector: 'app-grid-panels',
   templateUrl: './grid-panels.component.html',
@@ -37,6 +38,7 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Dashboard>();
   dashboard: Dashboard[] = [];
   perfilAdmin: boolean = false;
+  exibirSpinner: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -44,18 +46,26 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
     private router: Router,
     private dasboardService: DasboardService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    
-    
+    //Refresh da grid em cada 30 segs
+    const intervaloDeAtualizacao = 30000;
+    const timer$ = interval(intervaloDeAtualizacao);
+    timer$.subscribe(() => {
+      this.dataSource.data = [];
+      this.exibirSpinner = true;
+      setTimeout(() => {       
+        this.getListUsers();
+      }, 400);
+    });
 
     this.perfilAdmin = (sessionStorage.getItem('perfil') == "admin" ? true : false);
-    this.checkPerfilAdmin();   
+    this.checkPerfilAdmin();
   }
 
-  checkPerfilAdmin(){
-    if(!this.perfilAdmin){
+  checkPerfilAdmin() {
+    if (!this.perfilAdmin) {
       const itemsToRemove = ['message', 'delete', 'update'];
       this.displayedColumns = this.displayedColumns.filter(item => !itemsToRemove.includes(item));
     }
@@ -70,9 +80,12 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
 
   getListUsers() {
     this.dasboardService.getList().subscribe((dashboard: Dashboard[]) => {
-      this.dashboard = dashboard;
-      this.dataSource.data = this.dashboard;
-      console.log(this.dataSource.data)
+      if(dashboard.length > 0){
+        this.exibirSpinner = false;
+        this.dashboard = dashboard;
+        this.dataSource.data = this.dashboard;
+        console.log(this.dataSource.data)
+      }
     });
   }
 
@@ -96,10 +109,10 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
   animal!: string;
   name!: string;
 
-  openDialog(ip:string, porta:string, painel:string): void {
+  openDialog(ip: string, porta: string, painel: string, painelId: string): void {
     const dialogRef = this.dialog.open(MessageComponent, {
       width: '450px',
-      data: {ip: ip, porta: porta, painel:painel}
+      data: { ip: ip, porta: porta, painel: painel, painelId }
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
@@ -111,10 +124,10 @@ export class GridPanelsComponent implements OnInit, AfterViewInit {
 
 
 
-  openConfirmDialog(id:string): void {
+  openConfirmDialog(id: string): void {
     const dialogRef = this.dialog.open(MessageDeleteComponent, {
       width: '450px',
-      data: {id: id, }
+      data: { id: id, }
     });
   }
 }

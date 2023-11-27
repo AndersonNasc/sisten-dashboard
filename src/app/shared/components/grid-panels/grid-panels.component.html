@@ -3,19 +3,14 @@
 <div style="width: 96%;">
   <mat-card class="cardWithShadow">
     <mat-card-content class="p-24">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between" *ngIf="perfilAdmin">
         <mat-card-title class="title">Paineis</mat-card-title>
-        <button
-          title="Adicionar Paineis"
-          (click)="newDashboard()"
-          class="btn btn-info my-1 text-white"
-          type="button"
-        >
+        <button title="Adicionar Paineis" (click)="newDashboard()" class="btn btn-info my-1 text-white" type="button">
           Adicionar Painel
         </button>
       </div>
 
-      <div class="table-responsive m-t-16">
+      <div class="table-responsive m-t-16">        
         <table mat-table [dataSource]="dataSource" class="w-100">
           <!-- Image Column -->
           <ng-container matColumnDef="image">
@@ -93,25 +88,17 @@
 
           <!-- Ativo Column -->
           <ng-container matColumnDef="active">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Ativo
             </th>
             <td mat-cell *matCellDef="let element">
               <ng-template [ngIf]="element.flag_ativo == true">
-                <span
-                  class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
-                >
+                <span class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12">
                   HABILITADO
                 </span>
               </ng-template>
               <ng-template [ngIf]="element.flag_ativo == false">
-                <span
-                  class="bg-light-error text-white bg-danger rounded p-1 f-w-600 p-6 p-y-4 f-s-12"
-                >
+                <span class="bg-light-error text-white bg-danger rounded p-1 f-w-600 p-6 p-y-4 f-s-12">
                   DESABILITADO
                 </span>
               </ng-template>
@@ -125,42 +112,45 @@
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
               <ng-template [ngIf]="element.ultimo_status == 'NORMAL'">
-                <span
-                  class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
-                >
+                <span class="bg-success text-white p-1 rounded f-w-600 p-6 p-y-4 f-s-12">
                   {{ element.ultimo_status }}
                 </span>
               </ng-template>
-              <ng-template
-                [ngIf]="
+              <!--Perfil Admin -->
+              <ng-template [ngIf]="
                   element.ultimo_status != 'NORMAL' &&
                   element.ultimo_status != '' &&
-                  element.ultimo_status != null
-                "
-              >
-                <span
-                  class="bg-light-warning text-white bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12"
-                >
+                  element.ultimo_status != null &&
+                  perfilAdmin
+                ">
+                <span class="bg-light-warning text-white bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12">
                   {{ element.ultimo_status }}
+                </span>
+              </ng-template>
+              <!--Perfil Usuário -->
+              <ng-template [ngIf]="
+              element.ultimo_status != 'NORMAL' &&
+              element.ultimo_status != '' &&
+              element.ultimo_status != null &&
+              !perfilAdmin
+            ">
+                <span class="bg-light-warning text-white bg-warning p-1 rounded f-w-600 p-6 p-y-4 f-s-12">
+                  FALHA
                 </span>
               </ng-template>
             </td>
           </ng-container>
           <!-- Mensagem Column -->
-          <ng-container matColumnDef="message" >
-           
+          <ng-container matColumnDef="message">
+
             <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Mensagem
             </th>
-            <td mat-cell *matCellDef="let element" >
-              <mat-icon
-                (click)="openDialog(element.ip, element.porta, element.nome)"
-                class="style-icon message"
-                title="Mensagens"
-                >message</mat-icon
-              >
+            <td mat-cell *matCellDef="let element">
+              <mat-icon *ngIf="element.flag_msg_fixa && element.flag_ativo" (click)="openDialog(element.ip, element.porta, element.nome, element._id)" class="style-icon message"
+                title="Mensagens">message</mat-icon>
             </td>
-          
+
           </ng-container>
 
           <!-- Update Column -->
@@ -178,27 +168,19 @@
             <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Excluir
             </th>
-            <td mat-cell *matCellDef="let element" >
-              <mat-icon
-                title="Apagar"
-                class="style-icon delete"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                (click)="openConfirmDialog(element._id)"
-                >delete</mat-icon
-              >
+            <td mat-cell *matCellDef="let element">
+              <mat-icon title="Apagar" class="style-icon delete" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="openConfirmDialog(element._id)">delete</mat-icon>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        <mat-paginator
-          [pageSizeOptions]="[20]"
-          showFirstLastButtons
-          aria-label="Select page of periodic elements"
-        >
+        <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons aria-label="Select page of periodic elements">
         </mat-paginator>
+
+        <mat-progress-spinner *ngIf="exibirSpinner" class="spinner" mode="indeterminate"></mat-progress-spinner>
       </div>
       <div class="d-flex justify-content-between" *ngId="perfilAdmin">
         <button class="btn btn-warning text-white my-1" type="button">Logs</button>
@@ -206,15 +188,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

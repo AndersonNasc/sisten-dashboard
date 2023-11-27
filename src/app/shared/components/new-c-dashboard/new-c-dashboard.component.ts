@@ -21,17 +21,22 @@ export class NewCDashboardComponent implements OnInit {
   route: string = '';
   ehNewForm: boolean = false;
   isCheckedSlide: boolean = true;
+  showLabelSlide: boolean = true;
+  isCheckedCampoMsgFixaSlide: boolean = false;
+  showCampoMsgFixaSlide: boolean = false;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private dasboardService: DasboardService
-  ) {}
+  ) {
+    this.createForm();
+  }
 
   ngOnInit(): void {
     this.route = this.activatedRoute.snapshot.url[0].path;
-    this.createForm();
+    
     // this.route = this.activatedRoute.snapshot.url[0].path;
     // this.createForm();
 
@@ -50,10 +55,11 @@ export class NewCDashboardComponent implements OnInit {
       id_ponto: new FormControl('', Validators.required),
       modelo: new FormControl('', Validators.required),
       ultimo_status: new FormControl('', Validators.required),
-      flag_ativo: new FormControl('', Validators.required),
+      flag_ativo: new FormControl(true, Validators.required),
       porta: new FormControl('', Validators.required),
       msg_fixa: new FormControl('', Validators.required),
       patrimonio: new FormControl('', Validators.required),
+      flag_msg_fixa: new FormControl('', Validators.required)
     });
   }
 
@@ -62,6 +68,7 @@ export class NewCDashboardComponent implements OnInit {
       .getListId(this.id)
       .subscribe((dashboard: Dashboard) => {
         this.dashboard = dashboard;
+        debugger
         this.formDashboard.controls['nome'].setValue(dashboard.nome);
         this.formDashboard.controls['ip'].setValue(dashboard.ip);
         this.formDashboard.controls['id_ponto'].setValue(dashboard.id_ponto);
@@ -69,8 +76,11 @@ export class NewCDashboardComponent implements OnInit {
         this.formDashboard.controls['ultimo_status'].setValue(dashboard.ultimo_status);
         this.formDashboard.controls['flag_ativo'].setValue(dashboard.flag_ativo);
         this.formDashboard.controls['porta'].setValue(dashboard.porta);
-        this.formDashboard.controls['msg_fixa'].setValue(this.isCheckedSlide);
+        this.formDashboard.controls['flag_msg_fixa'].setValue(dashboard.flag_msg_fixa);
         this.formDashboard.controls['patrimonio'].setValue(dashboard.patrimonio);
+        this.formDashboard.controls['msg_fixa'].setValue(dashboard.msg_fixa);
+        this.showCampoMsgFixaSlide = dashboard.flag_msg_fixa ?? false;
+        this.isCheckedCampoMsgFixaSlide = dashboard.flag_msg_fixa ?? false;
         console.log(this.dashboard);
       });
   }
@@ -83,15 +93,15 @@ export class NewCDashboardComponent implements OnInit {
       ip: this.formDashboard.controls['ip'].value,
       id_ponto: this.formDashboard.controls['id_ponto'].value,
       modelo: this.formDashboard.controls['modelo'].value,
-      msg_fixa:'',
+      msg_fixa: (this.isCheckedCampoMsgFixaSlide ? this.formDashboard.controls['msg_fixa'].value : ''),
       patrimonio:this.formDashboard.controls['patrimonio'].value ?? "",
       porta:this.formDashboard.controls['porta'].value,
       flag_ativo: this.isCheckedSlide,
-      flag_msg_fixa: false,
+      flag_msg_fixa: this.isCheckedCampoMsgFixaSlide,
       ultimo_status: '',
       // porta: this.formDashboard.controls['porta'].value,
     };
-    
+    debugger
     if (this.ehNewForm) {
       this.createUser(payload);
     } else {
@@ -115,5 +125,11 @@ export class NewCDashboardComponent implements OnInit {
 
   changeSlide(event: any) {
     this.isCheckedSlide = !this.isCheckedSlide;
+    this.showLabelSlide = this.isCheckedSlide;
+  }
+
+  changeCampoMsgFixaSlide(event: any) {
+    this.isCheckedCampoMsgFixaSlide = !this.isCheckedCampoMsgFixaSlide;
+    this.showCampoMsgFixaSlide = this.isCheckedCampoMsgFixaSlide;
   }
 }

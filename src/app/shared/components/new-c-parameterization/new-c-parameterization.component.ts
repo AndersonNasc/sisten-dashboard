@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ParametrizationService } from 'src/app/core/service/parameterization.service';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -21,12 +22,14 @@ export class NewCParameterizationComponent implements OnInit {
 
   form!: FormGroup;
   constructor(private formBuilder: FormBuilder,
-    private _parametrizationService: ParametrizationService) { }
+              private _parametrizationService: ParametrizationService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.createForm();
     this.getValue();
   }
+
 
   createForm() {
     this.formDashboard = this.formBuilder.group({
@@ -37,99 +40,110 @@ export class NewCParameterizationComponent implements OnInit {
       socketTimeout: new FormControl('', Validators.required),
       socketWaitReceive: new FormControl('', Validators.required),
       retryPainelSendMensage: new FormControl('', Validators.required),
-      endPointServerRepository: new FormControl('', Validators.required)
+      endPointServerRepository: new FormControl('', Validators.required),
+      retryCittati: new FormControl('', Validators.required)
     });
   }
 
-  update() {  
-    var obj:any =null;
+  update() {
+    var obj: any = null;
 
     this._parametrizationService.getValue().subscribe(
-      (response: any) => {})
+      (response: any) => { })
 
-      this._parametrizationService.getValue().subscribe(
-        (response: any) => {
-          Object.keys(response).forEach(key => {
-            let value = response[key];
-  
-            if (value.nome == "TEMPO_TRANSMITIR_MENSAGENS_MINUTOS"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('tempoTransmitirMensagemMin')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-              
-            if (value.nome == "TEMPO_ZERAR_PAINEIS_HORAS"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('tempoZerarPaineisHoras')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-              
-            if (value.nome == "TEMPO_TRANSMITIR_MENSAGENS_FIXAS_HORAS"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('tempoTransmitirMensagemFixaHora')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-             
-            if (value.nome == "TEMPO_AJUSTE_DATAHORA_HORAS"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('tempoAjusteDataHoraHoras')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-              
-            if (value.nome == "SOCKET_TIMEOUT"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('socketTimeout')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-             
-            if (value.nome == "SOCKET_WAIT_RECEIVE"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('socketWaitReceive')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-             
-            if (value.nome == "RETRY_PANEL_SEND_MESSAGE"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('retryPainelSendMensage')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }
-             
-            if (value.nome == "ENDPOINT_CITTATI"){
-              obj = {
-                "nome": value.nome,
-                "valor": this.formDashboard.get('endPointServerRepository')?.value
-              }
-              this._parametrizationService.upValue(obj,value._id).subscribe(
-                (response: any) => {})
-            }  
-          });
+    this._parametrizationService.getValue().subscribe(
+      (response: any) => {
+        Object.keys(response).forEach(key => {
+          let value = response[key];
 
-          setTimeout(() => {
-            this.getValue();        
-          }, 400);
-        }
-      );
+          if (value.nome == "TEMPO_TRANSMITIR_MENSAGENS_MINUTOS") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('tempoTransmitirMensagemMin')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "TEMPO_ZERAR_PAINEIS_HORAS") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('tempoZerarPaineisHoras')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "TEMPO_TRANSMITIR_MENSAGENS_FIXAS_HORAS") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('tempoTransmitirMensagemFixaHora')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "TEMPO_AJUSTE_DATAHORA_HORAS") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('tempoAjusteDataHoraHoras')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "SOCKET_TIMEOUT") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('socketTimeout')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "SOCKET_WAIT_RECEIVE") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('socketWaitReceive')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "RETRY_PANEL_SEND_MESSAGE") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('retryPainelSendMensage')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+
+          if (value.nome == "ENDPOINT_CITTATI") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('endPointServerRepository')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+          if (value.nome == "RETRY_CITTATI") {
+            obj = {
+              "nome": value.nome,
+              "valor": this.formDashboard.get('retryCittati')?.value
+            }
+            this._parametrizationService.upValue(obj, value._id).subscribe(
+              (response: any) => { })
+          }
+        });
+
+        setTimeout(() => {
+          this.getValue();
+        }, 400);
+
+        this._snackBar.open("Atualizado com sucesso")
+      }
+    );
   }
 
   getValue() {
@@ -169,6 +183,10 @@ export class NewCParameterizationComponent implements OnInit {
           if (value.nome == "ENDPOINT_CITTATI")
             this.formDashboard.patchValue({
               endPointServerRepository: value.valor
+            });
+          if (value.nome == "RETRY_CITTATI")
+            this.formDashboard.patchValue({
+              retryCittati: value.valor
             });
 
         });
