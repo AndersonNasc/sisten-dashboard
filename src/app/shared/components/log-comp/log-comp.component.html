@@ -29,13 +29,23 @@
               </td>
             </ng-container> -->
 
+             <!-- Painel Column -->
+             <ng-container matColumnDef="painel_evento">
+              <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+                Painel
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                {{ element.atributos.platform }}
+              </td>
+            </ng-container>
+
              <!-- Descrição Column -->
              <ng-container matColumnDef="descricao_evento">
               <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
-                Descrição
+                Status
               </th>
               <td mat-cell *matCellDef="let element" class="mat-body-1">
-                {{ element.descricao_evento }}
+                {{ element.status }}
               </td>
             </ng-container>
 
@@ -45,19 +55,41 @@
                 Tipo
               </th>
               <td mat-cell *matCellDef="let element" class="mat-body-1">
-                {{ element.tipo_evento }}
+                {{ element.tipo }}
+              </td>
+            </ng-container>
+
+            <!-- Host Column -->
+             <ng-container matColumnDef="host_evento">
+              <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+                Host
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                {{ element.atributos.host }}
+              </td>
+            </ng-container>
+
+            <!-- Port Column -->
+             <ng-container matColumnDef="port_evento">
+              <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+                Porta
+              </th>
+              <td mat-cell *matCellDef="let element" class="mat-body-1">
+                {{ element.atributos.port }}
               </td>
             </ng-container>
 
             <!-- Data Column -->
             <ng-container matColumnDef="data_evento">
-              <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
+              <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14"> 
                 Data
               </th>
               <td mat-cell *matCellDef="let element" class="mat-body-1">
-                {{ element.data_evento }}
+                {{ element.data }}
               </td>
             </ng-container>
+
+           
   
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

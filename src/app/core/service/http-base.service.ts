@@ -9,7 +9,7 @@ export class HttpBaseService {
   
   private readonly httpClient!: HttpClient;
     //private apiBase = 'http://localhost:3000/';
-    private apiBase = 'http://54.234.42.183:8000/v1/';
+    private apiBase = 'http://54.144.227.111:8000/v1/';
 
   constructor(protected readonly injector: Injector) {
     if (injector == null || injector == undefined) {

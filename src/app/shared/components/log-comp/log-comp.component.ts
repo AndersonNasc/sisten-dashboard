@@ -21,10 +21,15 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class LogCompComponent { 
 
-  displayedColumns: string[] = [    
+  displayedColumns: string[] = [   
+    'painel_evento', 
     'descricao_evento',
     'tipo_evento',
+    'host_evento',
+    'port_evento',
     'data_evento',
+    
+    
   ];
   dataSource = new MatTableDataSource<Logs>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
