@@ -141,7 +141,12 @@ export class NewCParameterizationComponent implements OnInit {
           this.getValue();
         }, 400);
 
-        this._snackBar.open("Atualizado com sucesso")
+        this._snackBar.open("Atualizado com sucesso","",{duration: 3* 1400})
+      },
+      (error: any) => {
+        // Tratamento de erro
+        this._snackBar.open("Ocorreu um erro: " + error,"",{duration: 3* 1400})
+        console.error('Ocorreu um erro:', error);
       }
     );
   }
